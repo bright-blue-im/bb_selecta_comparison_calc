@@ -489,6 +489,7 @@
             activationFee: parseFloat(document.getElementById('selectaUpfront')?.value),
             hardwareService: parseFloat(document.getElementById('selectaHardware')?.value0 || 0),
             technicalMaintenance: parseFloat(document.getElementById('selectaMaintenance')?.value),
+            platformFee: 0,
             retailMediaFee: 0,
             commerceFee: 0
           },
@@ -579,7 +580,7 @@
                 </tr>
                 <tr>
                     <td>Platform Fee</td>
-                    <td class="number" style="color: #666;">${formatCurrency(pricingStructure.selecta.platformFee)} (-${formatCurrency(pricingStructure.selecta.platformFee)} cost) = <span style="color: #000;">£0</span></td>
+                    <td class="number" style="color: #666;">n/a</td>
                     <td class="number">${formatCurrency(pricingStructure.brightBlue.platformFee)}</td>
                 </tr>
                 <tr>
