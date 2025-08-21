@@ -522,6 +522,10 @@
     </div>
 
     <button class="btn-calculate" onclick="calculateModel()">🔄 Recalculate Model</button>
+    
+    <button class="btn-calculate" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);" onclick="shareModel()">
+      📋 Copy Shareable Link
+    </button>
 
     <!-- Audit Trail Section -->
     <button class="btn-calculate" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);"
@@ -546,6 +550,81 @@
 
 
     <script>
+      // URL parameter handling
+      function updateURLParams() {
+        const params = new URLSearchParams();
+        
+        // Get all input values
+        params.set('numMachines', document.getElementById('numMachines').value);
+        params.set('contractYears', document.getElementById('contractYears').value);
+        params.set('machineCost', document.getElementById('machineCost').value);
+        params.set('maintenanceCost', document.getElementById('maintenanceCost').value);
+        params.set('productSales', document.getElementById('productSales').value);
+        params.set('adRevenue', document.getElementById('adRevenue').value);
+        
+        // Selecta pricing
+        params.set('selectaUpfront', document.getElementById('selectaUpfront').value);
+        params.set('selectaMaintenance', document.getElementById('selectaMaintenance').value);
+        
+        // Bright.Blue pricing
+        params.set('brightblueUpfront', document.getElementById('brightblueUpfront').value);
+        params.set('brightblueHardware', document.getElementById('brightblueHardware').value);
+        params.set('brightblueMaintenance', document.getElementById('brightblueMaintenance').value);
+        params.set('brightbluePlatform', document.getElementById('brightbluePlatform').value);
+        params.set('brightblueRetail', document.getElementById('brightblueRetail').value);
+        params.set('brightblueCommerce', document.getElementById('brightblueCommerce').value);
+        
+        // Update URL without reloading the page
+        const newURL = window.location.pathname + '?' + params.toString();
+        window.history.replaceState({}, '', newURL);
+      }
+
+      function loadURLParams() {
+        const params = new URLSearchParams(window.location.search);
+        
+        // Load values from URL if they exist
+        const paramMappings = [
+          'numMachines', 'contractYears', 'machineCost', 'maintenanceCost', 
+          'productSales', 'adRevenue', 'selectaUpfront', 'selectaMaintenance',
+          'brightblueUpfront', 'brightblueHardware', 'brightblueMaintenance',
+          'brightbluePlatform', 'brightblueRetail', 'brightblueCommerce'
+        ];
+        
+        paramMappings.forEach(param => {
+          if (params.has(param)) {
+            const element = document.getElementById(param);
+            if (element) {
+              element.value = params.get(param);
+            }
+          }
+        });
+      }
+
+      function shareModel() {
+        // Update URL first to ensure it has the latest values
+        updateURLParams();
+        
+        // Get the full URL
+        const shareableURL = window.location.href;
+        
+        // Copy to clipboard
+        navigator.clipboard.writeText(shareableURL).then(() => {
+          // Show success message
+          const button = event.target;
+          const originalText = button.innerHTML;
+          button.innerHTML = '✅ Link Copied!';
+          button.style.background = 'linear-gradient(135deg, #4caf50 0%, #8bc34a 100%)';
+          
+          // Reset button after 2 seconds
+          setTimeout(() => {
+            button.innerHTML = originalText;
+            button.style.background = 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)';
+          }, 2000);
+        }).catch(err => {
+          alert('Failed to copy link. URL: ' + shareableURL);
+        });
+      }
+
       function toggleAudit() {
         const auditSection = document.getElementById('auditSection');
         auditSection.style.display = auditSection.style.display === 'none' ? 'block' : 'none';
@@ -588,6 +667,9 @@
       function calculateModel() {
         // Check if all elements exist before proceeding
         if (!document.getElementById('numMachines')) return;
+        
+        // Update URL with current values
+        updateURLParams();
 
         // Get input values
         const numMachines = parseFloat(document.getElementById('numMachines').value);
@@ -1011,6 +1093,9 @@
 
       // Initial calculation on page load
       document.addEventListener('DOMContentLoaded', function () {
+        // Load parameters from URL first
+        loadURLParams();
+        
         // Initial calculation
         calculateModel();
         updateSummaryPosition();
