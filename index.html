@@ -138,7 +138,7 @@
 
     .summary-cards {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 20px;
       margin-top: 30px;
     }
@@ -292,11 +292,15 @@
       /* Smaller summary cards on mobile */
       .summary-cards {
         grid-template-columns: 1fr; /* Stack cards vertically */
-        gap: 10px;
+        gap: 8px;
+        max-width: 90%; /* Limit width to 90% of container */
+        margin: 0 auto; /* Center the cards */
       }
 
       .summary-cards.summary-fixed {
-        padding: 10px 15px !important; /* Smaller padding when fixed */
+        padding: 10px 5% !important; /* Use percentage padding for better scaling */
+        width: 100% !important; /* Override JS width setting */
+        left: 0 !important; /* Override JS positioning */
       }
 
       .summary-card {
@@ -360,8 +364,12 @@
         padding: 15px;
       }
 
+      .summary-cards {
+        max-width: 85%; /* Even more constrained on very small screens */
+      }
+
       .summary-cards.summary-fixed {
-        padding: 8px 10px !important; /* Even smaller padding */
+        padding: 8px 7.5% !important; /* Percentage-based for better scaling */
       }
 
       .summary-card {

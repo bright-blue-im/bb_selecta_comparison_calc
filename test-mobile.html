@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mobile Test</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    .test-info {
+      background: #f0f0f0;
+      padding: 10px;
+      margin-bottom: 20px;
+      border-radius: 5px;
+    }
+    iframe {
+      border: 2px solid #333;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    }
+  </style>
+</head>
+<body>
+  <h1>Mobile Responsiveness Test</h1>
+  
+  <div class="test-info">
+    <h2>Desktop View (1200px)</h2>
+    <p>Expected: Full size cards with 25px padding, 2.5em font size</p>
+  </div>
+  <iframe src="index.html" width="1200" height="600"></iframe>
+  
+  <div class="test-info">
+    <h2>Tablet View (768px)</h2>
+    <p>Expected: Smaller cards with 15px padding, 1.8em font size</p>
+  </div>
+  <iframe src="index.html" width="768" height="600"></iframe>
+  
+  <div class="test-info">
+    <h2>Mobile View (375px)</h2>
+    <p>Expected: Even smaller cards with 12px padding, 1.5em font size</p>
+  </div>
+  <iframe src="index.html" width="375" height="600"></iframe>
+  
+  <script>
+    // Add some debugging info
+    window.addEventListener('load', () => {
+      console.log('Test page loaded');
+    });
+  </script>
+</body>
+</html>
