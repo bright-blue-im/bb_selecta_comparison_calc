@@ -291,34 +291,49 @@
 
       /* Smaller summary cards on mobile */
       .summary-cards {
-        grid-template-columns: 1fr; /* Stack cards vertically */
-        gap: 8px;
-        max-width: 90%; /* Limit width to 90% of container */
-        margin: 0 auto; /* Center the cards */
+        display: flex; /* Change to flexbox for horizontal scrolling */
+        flex-direction: row;
+        gap: 10px;
+        overflow-x: auto; /* Allow horizontal scrolling */
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+        padding: 10px 0;
       }
 
       .summary-cards.summary-fixed {
-        padding: 10px 5% !important; /* Use percentage padding for better scaling */
+        padding: 10px !important;
         width: 100% !important; /* Override JS width setting */
         left: 0 !important; /* Override JS positioning */
       }
 
       .summary-card {
-        padding: 15px !important; /* Reduced from 25px */
+        flex: 0 0 30%; /* Each card takes 30% width */
+        max-width: 150px; /* Maximum width constraint */
+        padding: 10px !important;
+        text-align: center; /* Center align content */
       }
 
       .summary-card h3 {
-        font-size: 1em !important; /* Reduced from 1.2em */
-        margin-bottom: 10px !important;
+        font-size: 0.75em !important; /* Much smaller title */
+        margin-bottom: 5px !important;
+        line-height: 1.2;
       }
 
       .summary-value {
-        font-size: 1.8em !important; /* Reduced from 2.5em */
-        margin-bottom: 5px !important;
+        font-size: 1.1em !important; /* Compact value size */
+        margin-bottom: 3px !important;
+        line-height: 1;
       }
 
       .summary-detail {
-        font-size: 0.85em !important; /* Reduced from 0.9em */
+        font-size: 0.65em !important; /* Very small details */
+        line-height: 1.2;
+        opacity: 0.9;
+      }
+
+      /* Hide less important details on mobile */
+      .summary-detail:last-child {
+        display: none; /* Hide "Per Machine" detail to save space */
       }
 
       /* Adjust grid layouts for mobile */
@@ -365,27 +380,42 @@
       }
 
       .summary-cards {
-        max-width: 85%; /* Even more constrained on very small screens */
+        gap: 5px; /* Even smaller gap */
       }
 
       .summary-cards.summary-fixed {
-        padding: 8px 7.5% !important; /* Percentage-based for better scaling */
+        padding: 5px !important; /* Minimal padding */
       }
 
       .summary-card {
-        padding: 12px !important;
+        flex: 0 0 30%; /* Still 30% but with smaller overall container */
+        max-width: 120px; /* Even smaller max width */
+        padding: 8px !important;
+        min-width: 100px; /* Ensure readability */
       }
 
       .summary-value {
-        font-size: 1.5em !important;
+        font-size: 0.95em !important; /* Even more compact */
       }
 
       .summary-card h3 {
-        font-size: 0.9em !important;
+        font-size: 0.7em !important;
       }
 
       .summary-detail {
-        font-size: 0.8em !important;
+        font-size: 0.6em !important;
+      }
+      
+      /* Show scroll indicator on mobile */
+      .summary-cards::after {
+        content: '→';
+        position: absolute;
+        right: 5px;
+        top: 50%;
+        transform: translateY(-50%);
+        opacity: 0.5;
+        font-size: 1.5em;
+        pointer-events: none;
       }
     }
   </style>
@@ -732,7 +762,7 @@
         const selectaMonthlyRevenue = selectaPricing.monthlyFees * monthsTotal * numMachines;
         const selectaMonthlyPassthroughCost = selectaMonthlyRevenue; // Pass-through cost equals revenue
         const selectaNetContractRevenue = selectaUpfrontRevenue; // Only upfront is profit
-        const selectaProductRevenue = productSales * monthsTotal * numMachines;
+        const selectaProductRevenue = 0;
         const selectaTotalRevenue = selectaNetContractRevenue + selectaProductRevenue;
 
         // Bright.Blue calculations
