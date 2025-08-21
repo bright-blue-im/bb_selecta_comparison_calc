@@ -265,6 +265,120 @@
       padding-top: 10px;
       border-top: 2px solid #667eea;
     }
+
+    /* Mobile responsive styles */
+    @media (max-width: 768px) {
+      body {
+        padding: 10px; /* Reduce background gap on mobile */
+      }
+
+      .container {
+        border-radius: 15px;
+      }
+
+      .header {
+        padding: 20px;
+      }
+
+      .header h1 {
+        font-size: 1.8em;
+      }
+
+      .content {
+        padding: 20px;
+      }
+
+      /* Smaller summary cards on mobile */
+      .summary-cards {
+        grid-template-columns: 1fr; /* Stack cards vertically */
+        gap: 10px;
+      }
+
+      .summary-cards.summary-fixed {
+        padding: 10px 15px !important; /* Smaller padding when fixed */
+      }
+
+      .summary-card {
+        padding: 15px; /* Reduced from 25px */
+      }
+
+      .summary-card h3 {
+        font-size: 1em; /* Reduced from 1.2em */
+        margin-bottom: 10px;
+      }
+
+      .summary-value {
+        font-size: 1.8em; /* Reduced from 2.5em */
+        margin-bottom: 5px;
+      }
+
+      .summary-detail {
+        font-size: 0.85em; /* Reduced from 0.9em */
+      }
+
+      /* Adjust grid layouts for mobile */
+      .grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+      }
+
+      /* Smaller table text on mobile */
+      table {
+        font-size: 0.85em;
+      }
+
+      th, td {
+        padding: 8px;
+      }
+
+      /* Adjust section spacing */
+      .section {
+        margin-bottom: 25px;
+      }
+
+      .section-title {
+        font-size: 1.4em;
+      }
+    }
+
+    /* Even smaller screens */
+    @media (max-width: 480px) {
+      body {
+        padding: 5px; /* Minimal background gap on very small screens */
+      }
+
+      .header h1 {
+        font-size: 1.5em;
+      }
+
+      .header p {
+        font-size: 0.95em;
+      }
+
+      .content {
+        padding: 15px;
+      }
+
+      .summary-cards.summary-fixed {
+        padding: 8px 10px !important; /* Even smaller padding */
+      }
+
+      .summary-card {
+        padding: 12px;
+      }
+
+      .summary-value {
+        font-size: 1.5em;
+      }
+
+      .summary-card h3 {
+        font-size: 0.9em;
+      }
+
+      .summary-detail {
+        font-size: 0.8em;
+      }
+    }
   </style>
 </head>
 
