@@ -149,6 +149,7 @@
       top: 0;
       z-index: 1000;
       margin: 0;
+      padding: 16px 20px;
       background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       /* ensure the banner itself paints the background instead of showing container's white */
       backdrop-filter: none;
@@ -655,7 +656,7 @@
         const rect = container.getBoundingClientRect();
         summary.style.left = rect.left + 'px';
         summary.style.width = rect.width + 'px';
-        summary.style.padding = '16px 20px';
+        // Don't set padding inline - let CSS media queries handle it
         summary.style.boxSizing = 'border-box';
 
         // Reserve space so the fixed summary doesn't cover content
